@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find src:*)",
+      "Bash(npm run:*)",
+      "Bash(xargs grep:*)",
+      "Bash(npx oxlint:*)",
+      "Bash(npx vue-tsc:*)"
+    ]
+  }
+}

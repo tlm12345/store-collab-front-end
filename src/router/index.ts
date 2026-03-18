@@ -32,6 +32,46 @@ const router = createRouter({
       path: '/profile',
       name: 'profile',
       component: () => import('../views/ProfileView.vue'),
+      meta: { requiresAuth: true }
+    },
+    // User gallery routes
+    {
+      path: '/gallery',
+      name: 'gallery',
+      component: () => import('../views/user/UserGalleryView.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/gallery/:id',
+      name: 'image-detail',
+      component: () => import('../views/user/ImageDetailView.vue'),
+      meta: { requiresAuth: true }
+    },
+    // Space management routes
+    {
+      path: '/spaces',
+      name: 'spaces',
+      component: () => import('../views/space/SpaceListView.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/space/:id',
+      name: 'space-detail',
+      component: () => import('../views/space/SpaceDetailView.vue'),
+      meta: { requiresAuth: true }
+    },
+    // New space management routes
+    {
+      path: '/my-space',
+      name: 'my-space',
+      component: () => import('../views/user/MySpaceView.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/space-management',
+      name: 'space-management',
+      component: () => import('../views/space/SpaceManagementView.vue'),
+      meta: { requiresAuth: true }
     },
     {
       path: '/admin',
@@ -51,6 +91,12 @@ const router = createRouter({
       component: () => import('../views/admin/UserDetailView.vue'),
       meta: { requiresAuth: true, requiresAdmin: true }
     },
+    {
+      path: '/admin/pictures',
+      name: 'admin-pictures',
+      component: () => import('../views/admin/PictureManagementView.vue'),
+      meta: { requiresAuth: true, requiresAdmin: true }
+    },
   ],
 })
 
@@ -68,8 +114,8 @@ router.beforeEach((to, _from, next) => {
 
     // 需要管理员权限的路由
     if (to.meta.requiresAdmin && userStore.user?.role !== 'admin') {
-      // 不是管理员，跳转到首页
-      next('/')
+      // 不是管理员，跳转到图库页面
+      next('/gallery')
       return
     }
   }

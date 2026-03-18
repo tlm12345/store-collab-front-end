@@ -45,7 +45,8 @@ const createForm = ref<UserAddRequest>({
   userPassword: '',
   userAvatar: '',
   userProfile: '',
-  userRole: 'user'
+  userRole: 'user',
+  confirmPassword: ''
 })
 
 // ========== 方法定义 ==========
@@ -172,7 +173,8 @@ function openCreateDialog() {
     userPassword: '',
     userAvatar: '',
     userProfile: '',
-    userRole: 'user'
+    userRole: 'user',
+    confirmPassword: ''
   }
   showCreateDialog.value = true
 }
@@ -188,7 +190,8 @@ function closeCreateDialog() {
     userPassword: '',
     userAvatar: '',
     userProfile: '',
-    userRole: 'user'
+    userRole: 'user',
+    confirmPassword: '',
   }
 }
 
@@ -216,6 +219,7 @@ async function handleCreateUser() {
 
   try {
     creating.value = true
+    createForm.value.confirmPassword = createForm.value.userPassword
     const response = await addUser(createForm.value)
     if (response.code === 0) {
       alert('创建成功')

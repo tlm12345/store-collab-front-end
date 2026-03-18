@@ -4,18 +4,38 @@
  */
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { RouterView, useRouter } from 'vue-router'
+import { ref, computed, onMounted } from 'vue'
+import { RouterView, useRouter, useRoute } from 'vue-router'
 import { getCurrentUser } from '@/api/user'
 import type { UserVO } from '@/types/api'
+import { useUserStore } from '@/stores/user'
 
 const router = useRouter()
+const route = useRoute()
+const userStore = useUserStore()
 
 // ========== 状态 ==========
 
-const activeTab = ref('users')
+// 根据当前路由确定激活的标签
+const activeTab = computed(() => {
+  const path = route.path
+  if (path.includes('/admin/users')) return 'users'
+  if (path.includes('/admin/pictures')) return 'pictures'
+  return 'users'
+})
+
 const currentUser = ref<UserVO | null>(null)
 const checkingUser = ref(false)
+
+// ========== 生命周期 ==========
+
+onMounted(() => {
+  // 检查用户是否为管理员
+  if (userStore.user?.role !== 'admin') {
+    router.push('/gallery')
+    return
+  }
+})
 
 // ========== 方法定义 ==========
 
@@ -37,8 +57,7 @@ async function checkCurrentUser() {
   }
 }
 
-function navigateTo(path: string, tab: string) {
-  activeTab.value = tab
+function navigateTo(path: string, _tab: string) {
   router.push(path)
 }
 </script>
@@ -105,6 +124,18 @@ function navigateTo(path: string, tab: string) {
             <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
           </svg>
           <span>用户管理</span>
+        </div>
+        <div
+          class="nav-item"
+          :class="{ active: activeTab === 'pictures' }"
+          @click="navigateTo('/admin/pictures', 'pictures')"
+        >
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+          </svg>
+          <span>图片管理</span>
         </div>
       </nav>
     </aside>

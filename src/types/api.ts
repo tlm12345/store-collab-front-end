@@ -246,6 +246,11 @@ export interface UserAddRequest {
   userPassword: string
 
   /**
+   * 用户确认密码
+   */
+  confirmPassword: string
+
+  /**
    * 用户头像
    */
   userAvatar?: string
@@ -408,4 +413,738 @@ export interface UserVO {
    * 更新时间
    */
   updateTime?: string
+}
+
+// ==================== 图片管理相关类型 ====================
+
+/**
+ * 图片信息（原始实体）
+ * 对应后端 Picture 实体类
+ * 用于管理员接口返回的完整图片数据
+ */
+export interface Picture {
+  /**
+   * 图片 ID
+   */
+  id: string
+
+  /**
+   * 图片 URL
+   */
+  url: string
+
+  /**
+   * 图片名称
+   */
+  name: string
+
+  /**
+   * 图片描述
+   */
+  introduction?: string
+
+  /**
+   * 图片分类
+   */
+  category?: string
+
+  /**
+   * 图片标签（JSON 数组字符串）
+   */
+  tags?: string
+
+  /**
+   * 文件大小（字节）
+   */
+  picSize?: number
+
+  /**
+   * 图片宽度
+   */
+  picWidth?: number
+
+  /**
+   * 图片高度
+   */
+  picHeight?: number
+
+  /**
+   * 图片宽高比
+   */
+  picScale?: number
+
+  /**
+   * 图片格式（jpg/png/gif 等）
+   */
+  picFormat?: string
+
+  /**
+   * 图片主色调
+   */
+  picAve?: string
+
+  /**
+   * 创建者 ID
+   */
+  userId?: string
+
+  /**
+   * 空间 ID
+   */
+  spaceId?: string
+
+  /**
+   * 审核状态（0=待审核, 1=通过, 2=拒绝）
+   */
+  viewStatus?: number
+
+  /**
+   * 审核信息
+   */
+  viewMessage?: string
+
+  /**
+   * 创建时间
+   */
+  createTime?: string
+
+  /**
+   * 更新时间
+   */
+  updateTime?: string
+
+  /**
+   * 是否删除（逻辑删除标志）
+   */
+  isDelete?: number
+}
+
+/**
+ * 图片信息 VO（View Object）
+ * 对应后端 PictureVO
+ */
+export interface PictureVO {
+  /**
+   * 图片 ID
+   */
+  id: string
+
+  /**
+   * 图片 URL
+   */
+  url: string
+
+  /**
+   * 图片名称
+   */
+  name: string
+
+  /**
+   * 图片描述
+   */
+  introduction?: string
+
+  /**
+   * 图片分类
+   */
+  category?: string
+
+  /**
+   * 图片标签（JSON 数组字符串）
+   */
+  tags?: string
+
+  /**
+   * 文件大小（字节）
+   */
+  picSize?: number
+
+  /**
+   * 图片宽度
+   */
+  picWidth?: number
+
+  /**
+   * 图片高度
+   */
+  picHeight?: number
+
+  /**
+   * 图片宽高比
+   */
+  picScale?: number
+
+  /**
+   * 图片格式（jpg/png/gif 等）
+   */
+  picFormat?: string
+
+  /**
+   * 图片主色调
+   */
+  picAve?: string
+
+  /**
+   * 创建者 ID
+   */
+  userId?: string
+
+  /**
+   * 空间 ID
+   */
+  spaceId?: string
+
+  /**
+   * 创建者信息
+   */
+  userVO?: UserVO
+
+  /**
+   * 创建时间
+   */
+  createTime?: string
+
+  /**
+   * 更新时间
+   */
+  updateTime?: string
+
+  /**
+   * 权限列表
+   */
+  permissionList?: string[]
+
+  /**
+   * 审核状态（0=待审核, 1=通过, 2=拒绝）
+   */
+  viewStatus?: number
+
+  /**
+   * 审核信息
+   */
+  viewMessage?: string
+
+  /**
+   * 审核时间
+   */
+  viewTime?: string
+}
+
+/**
+ * 添加图片请求体
+ * 对应后端 PictureAddRequest
+ */
+export interface PictureAddRequest {
+  /**
+   * 图片 URL（必填）
+   */
+  url: string
+
+  /**
+   * 图片名称（必填）
+   */
+  name: string
+
+  /**
+   * 图片描述
+   */
+  introduction?: string
+
+  /**
+   * 图片分类
+   */
+  category?: string
+
+  /**
+   * 图片标签（JSON 数组字符串）
+   */
+  tags?: string
+}
+
+/**
+ * 更新图片请求体（管理员）
+ * 对应后端 PictureUpdateRequest
+ */
+export interface PictureUpdateRequest {
+  /**
+   * 图片 ID（必填）
+   */
+  id: string
+
+  /**
+   * 图片 URL
+   */
+  url?: string
+
+  /**
+   * 图片名称
+   */
+  name?: string
+
+  /**
+   * 图片描述
+   */
+  introduction?: string
+
+  /**
+   * 图片分类
+   */
+  category?: string
+
+  /**
+   * 图片标签（JSON 数组字符串）
+   */
+  tags?: string
+
+  /**
+   * 审核状态（0=待审核, 1=通过, 2=拒绝）
+   */
+  viewStatus?: number
+
+  /**
+   * 审核信息
+   */
+  viewMessage?: string
+}
+
+/**
+ * 编辑图片请求体（所有者或管理员）
+ * 对应后端 PictureEditRequest
+ */
+export interface PictureEditRequest {
+  /**
+   * 图片 ID（必填）
+   */
+  id: string
+
+  /**
+   * 图片名称
+   */
+  name?: string
+
+  /**
+   * 图片描述
+   */
+  introduction?: string
+
+  /**
+   * 图片分类
+   */
+  category?: string
+
+  /**
+   * 图片标签（JSON 数组字符串）
+   */
+  tags?: string
+}
+
+/**
+ * 查询图片请求体
+ * 对应后端 PictureQueryRequest
+ */
+export interface PictureQueryRequest {
+  /**
+   * 搜索关键词（搜索名称和描述）
+   */
+  searchText?: string
+
+  /**
+   * 图片名称
+   */
+  name?: string
+
+  /**
+   * 图片描述
+   */
+  introduction?: string
+
+  /**
+   * 图片分类
+   */
+  category?: string
+
+  /**
+   * 图片标签列表
+   */
+  tags?: string[]
+
+  /**
+   * 最小文件大小
+   */
+  minPicSize?: number
+
+  /**
+   * 最大文件大小
+   */
+  maxPicSize?: number
+
+  /**
+   * 图片宽度
+   */
+  picWidth?: number
+
+  /**
+   * 图片高度
+   */
+  picHeight?: number
+
+  /**
+   * 图片宽高比
+   */
+  picScale?: number
+
+  /**
+   * 图片格式
+   */
+  picFormat?: string
+
+  /**
+   * 图片主色调
+   */
+  picAve?: string
+
+  /**
+   * 创建者 ID
+   */
+  userId?: string
+
+  /**
+   * 空间 ID
+   */
+  spaceId?: string
+
+  /**
+   * 创建时间
+   */
+  createTime?: string
+
+  /**
+   * 编辑时间下限
+   */
+  startEditTime?: string
+
+  /**
+   * 编辑时间上限
+   */
+  endEditTime?: string
+
+  /**
+   * 是否查询私有空间
+   */
+  queryPrivateSpace?: boolean
+
+  /**
+   * 当前页码
+   */
+  pageNum?: number
+
+  /**
+   * 每页数量
+   */
+  pageSize?: number
+}
+
+/**
+   * 通过 URL 上传图片请求体
+   * 对应后端 UploadPictureRequest
+   */
+export interface UploadPictureRequest {
+  /**
+   * 图片 ID（编辑时使用）
+   */
+  id?: string
+
+  /**
+   * 图片 URL
+   */
+  url?: string
+
+  /**
+   * 图片名称
+   */
+  name?: string
+
+  /**
+   * 图片描述
+   */
+  introduction?: string
+
+  /**
+   * 图片分类
+   */
+  category?: string
+
+  /**
+   * 图片标签列表
+   */
+  tags?: string[]
+
+  /**
+   * 空间 ID
+   */
+  spaceId?: string
+}
+
+/**
+ * 标签和分类响应
+ * 对应后端 PictureTagCategory
+ */
+export interface PictureTagCategory {
+  /**
+   * 标签列表
+   */
+  tags: string[]
+
+  /**
+   * 分类列表
+   */
+  categories: string[]
+}
+
+/**
+ * 删除请求体
+ * 对应后端 DeleteRequest
+ */
+export interface DeleteRequest {
+  /**
+   * 要删除的 ID
+   */
+  id: string
+}
+
+// ==================== 空间管理相关类型 ====================
+
+/**
+ * 空间信息（实体）
+ * 对应后端 Space 实体类
+ */
+export interface Space {
+  /**
+   * 空间 ID
+   */
+  id: string
+
+  /**
+   * 空间名称
+   */
+  spaceName: string
+
+  /**
+   * 空间等级：0-普通版, 1-专业版, 2-旗舰版
+   */
+  spaceLevel: number
+
+  /**
+   * 空间类型：0-私有空间, 1-团队空间
+   */
+  spaceType: number
+
+  /**
+   * 空间已使用容量（字节）
+   */
+  spaceSizeUsed: number
+
+  /**
+   * 空间最大容量（字节）
+   */
+  spaceMaxSize: number
+
+  /**
+   * 当前空间下的图片数量
+   */
+  spaceTotalCount: number
+
+  /**
+   * 空间最大图片数量
+   */
+  spaceMaxCount: number
+
+  /**
+   * 创建用户 ID
+   */
+  userId: string
+
+  /**
+   * 创建时间
+   */
+  createTime?: string
+
+  /**
+   * 编辑时间
+   */
+  editTime?: string
+
+  /**
+   * 更新时间
+   */
+  updateTime?: string
+}
+
+/**
+ * 空间信息 VO（View Object）
+ * 对应后端 SpaceVO
+ */
+export interface SpaceVO extends Space {
+  /**
+   * 创建者信息
+   */
+  userVO?: UserVO
+
+  /**
+   * 当前用户的权限列表
+   */
+  permissionList?: string[]
+}
+
+/**
+ * 空间成员信息（实体）
+ * 对应后端 SpaceUser 实体类
+ */
+export interface SpaceUser {
+  /**
+   * 记录 ID
+   */
+  id: string
+
+  /**
+   * 空间 ID
+   */
+  spaceId: string
+
+  /**
+   * 用户 ID
+   */
+  userId: string
+
+  /**
+   * 空间角色：admin-管理员, editor-编辑者, viewer-浏览者
+   */
+  spaceRole: 'admin' | 'editor' | 'viewer'
+
+  /**
+   * 创建时间
+   */
+  createTime?: string
+
+  /**
+   * 更新时间
+   */
+  updateTime?: string
+}
+
+/**
+ * 空间成员信息 VO（View Object）
+ * 对应后端 SpaceUserVO
+ */
+export interface SpaceUserVO extends SpaceUser {
+  /**
+   * 空间信息
+   */
+  spaceVO?: SpaceVO
+
+  /**
+   * 用户信息
+   */
+  userVO?: UserVO
+}
+
+/**
+ * 创建空间请求体
+ * 对应后端 SpaceCreateRequest
+ */
+export interface SpaceCreateRequest {
+  /**
+   * 空间名称
+   */
+  spaceName: string
+
+  /**
+   * 空间等级：0-普通版, 1-专业版, 2-旗舰版
+   */
+  spaceLevel?: number
+
+  /**
+   * 空间类型：0-私有空间, 1-团队空间
+   */
+  spaceType?: number
+}
+
+/**
+ * 编辑空间请求体
+ * 对应后端 SpaceEditRequest
+ */
+export interface SpaceEditRequest {
+  /**
+   * 空间 ID
+   */
+  id: string
+
+  /**
+   * 空间名称
+   */
+  spaceName: string
+}
+
+/**
+ * 添加空间成员请求体
+ * 对应后端 SpaceUserAddRequest
+ */
+export interface SpaceAddUserRequest {
+  /**
+   * 空间 ID
+   */
+  spaceId: string
+
+  /**
+   * 用户 ID
+   */
+  userId: string
+
+  /**
+   * 空间角色：admin, editor, viewer
+   */
+  spaceRole?: 'admin' | 'editor' | 'viewer'
+}
+
+/**
+ * 更新空间成员请求体
+ * 对应后端 SpaceUserUpdateRequest
+ */
+export interface SpaceUpdateUserRequest {
+  /**
+   * 记录 ID
+   */
+  id: string
+
+  /**
+   * 空间角色
+   */
+  spaceRole: 'admin' | 'editor' | 'viewer'
+}
+
+/**
+ * 查询空间成员请求体
+ * 对应后端 GetSpaceUserRequest
+ */
+export interface GetSpaceUserRequest {
+  /**
+   * 空间 ID
+   */
+  spaceId: string
+
+  /**
+   * 用户 ID
+   */
+  userId: string
+}
+
+/**
+ * 查询空间所有成员请求体
+ * 对应后端 GetAllSpaceUserRequest
+ */
+export interface GetAllSpaceUserRequest {
+  /**
+   * 空间 ID
+   */
+  spaceId: string
 }

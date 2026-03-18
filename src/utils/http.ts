@@ -108,10 +108,16 @@ export async function request<T = any>(
     : getFullUrl(url)
 
   // 构造请求头
-  const headers: HeadersInit = {
-    'Content-Type': 'application/json',
-    ...restConfig.headers
-  }
+  // 注意：如果 body 是 FormData，让浏览器自动设置 Content-Type（包含 boundary）
+  const isFormData = restConfig.body instanceof FormData
+  const headers: HeadersInit = isFormData
+    ? {
+        ...restConfig.headers
+      }
+    : {
+        'Content-Type': 'application/json',
+        ...restConfig.headers
+      }
 
   // 注意：后端使用 Session 认证，需要显式设置 credentials: 'include'
   // 这样浏览器才会跨域请求携带 Cookie 中的 Session ID
@@ -194,10 +200,13 @@ export function post<T = any>(
   data?: any,
   config?: RequestConfig
 ): Promise<ApiResponse<T>> {
+  // 处理 body：如果是 FormData 直接传递，否则 JSON 序列化
+  const body = data instanceof FormData ? data : (data ? JSON.stringify(data) : undefined)
+
   return request<T>(url, {
     ...config,
     method: 'POST',
-    body: data ? JSON.stringify(data) : undefined
+    body
   })
 }
 

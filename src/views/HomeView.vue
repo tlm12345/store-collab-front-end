@@ -42,8 +42,8 @@ function goToRegister() {
           <button class="btn btn-secondary" @click="goToLogin">登录账户</button>
         </div>
         <div v-else class="hero-actions">
-          <button class="btn btn-primary" @click="router.push('/profile')">
-            查看个人资料
+          <button class="btn btn-primary" @click="router.push('/gallery')">
+            浏览图库
           </button>
         </div>
       </div>
@@ -171,8 +171,8 @@ function goToRegister() {
         <button v-if="!isLoggedIn" class="btn btn-primary btn-large" @click="goToRegister">
           免费注册
         </button>
-        <button v-else class="btn btn-primary btn-large" @click="router.push('/profile')">
-          查看个人资料
+        <button v-else class="btn btn-primary btn-large" @click="router.push('/gallery')">
+          浏览图库
         </button>
       </div>
     </section>

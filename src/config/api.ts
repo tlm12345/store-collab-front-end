@@ -39,6 +39,36 @@ export const API_ENDPOINTS = {
     GET_BY_ID: '/user/get',
     GET_CURRENT: '/user/current',
     LIST_PAGE: '/user/list/page/vo'
+  },
+  // 图片管理相关
+  PICTURE: {
+    UPLOAD: '/picture/upload',
+    UPLOAD_URL: '/picture/upload/url',
+    DELETE: '/picture/delete',
+    GET_BY_ID: '/picture/get',
+    LIST_PAGE: '/picture/list/page/vo',
+    ADMIN_LIST_PAGE: '/picture/admin/list/page/vo',
+    UPDATE: '/picture/update',
+    EDIT: '/picture/edit',
+    GET_TAG_CATEGORY: '/picture/tag_category'
+  },
+  // 空间管理相关
+  SPACE: {
+    CREATE: '/space/create',
+    DELETE: '/space/delete',
+    EDIT: '/space/edit',
+    GET_BY_ID: '/space/get',
+    LIST: '/space/list/my',
+    GET_MY_SPACE: '/space/myspace'
+  },
+  // 空间成员管理相关
+  SPACE_USER: {
+    ADD: '/space_user/add',
+    DELETE: '/space_user/delete',
+    UPDATE: '/space_user/update',
+    GET: '/space_user/get',
+    LIST: '/space_user/list/my',
+    LIST_MY_ALL_JOINED_SPACE: '/space_user/list/joined_space'
   }
 } as const
 
